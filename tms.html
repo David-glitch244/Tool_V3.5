@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool for 4oo7 Temperature Data Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body onload="checkLogin(); populateTimes(); populateGroups(); populateDates(); loadSavedDisplay();">
+    <h1>Tool for 4oo7 Temperature Data Analysis</h1>
+    <h2>C Train Data</h2>
+    <div class="buttons">
+        <button class="import-btn" onclick="importExcel()">Import from Excel</button>
+        <button class="show-data-btn" onclick="setModeAndDisplay('bearing')">Show Bearing Temperature</button>
+        <button class="algo-btn" onclick="setModeAndDisplay('algo')">4oo7 algorithm</button>
+        <button class="analysis-btn" onclick="showAnalysis()">Analysis</button>
+        <button class="save-btn" onclick="saveDisplay()">Save</button>
+        <button class="clear-btn" onclick="clearData()">Clear</button>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+    <div class="filter-section">
+        <div class="date-section">
+            <label>Date</label>
+            <select id="date-select" onchange="updateDisplay()">
+                <option value="all">All</option>
+            </select>
+        </div>
+        <div class="time-section">
+            <label>Time</label>
+            <select id="time-select" onchange="updateDisplay()">
+                <option value="all">All</option>
+            </select>
+        </div>
+        <div class="group-section">
+            <label>Car</label>
+            <select id="group-select" onchange="updateDisplay()">
+                <option value="all">All</option>
+            </select>
+        </div>
+        <button class="reset-btn" onclick="resetFilters()">Reset</button>
+    </div>
+    <div id="data-display"></div>
+    <input type="file" id="file-input" style="display:none;" onchange="handleFile(this.files)">
+    <div id="analysisModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAnalysisModal()">&times;</span>
+            <div id="analysis-table"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
